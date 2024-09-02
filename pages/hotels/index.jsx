@@ -57,19 +57,25 @@ const Hotels = ({ hotels }) => {
 
   {/* Hotels List */}
   <div className="col-span-1 md:col-span-4 hide-scrollbar order-2">
-    {list.length > 0
-      ? list.map((e) => (
-          <div key={e._id}>
-            <Hotel e={e} />
-          </div>
-        ))
-      : hotels
+    {hotels.length>0
       ? hotels.map((e) => (
           <div key={e._id}>
             <Hotel e={e} />
           </div>
         ))
-      : ""}
+      : 
+      (
+        <div className="flex flex-col items-center justify-center h-full text-center p-4">
+        <img
+          src="/logo.png" // Replace with your image path
+          alt="No posts found"
+          className="w-48 h-48 mb-4"
+        />
+        <h2 className="text-2xl font-semibold mb-2">No Posts Found</h2>
+        <p className="text-gray-600">There are no posts to display for this query.</p>
+      </div>
+      )
+      }
   </div>
 </div>
 
