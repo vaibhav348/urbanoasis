@@ -1,22 +1,76 @@
-import Image from 'next/image'
-import Block from "./Block"
-const Header1 = () => {
-    return (
-        <div className='flex justify-between border-b-2 border-gray-300 items-center h-20 px-10'>
-            <Image src={"/logo.png"} alt='logo' width={200} height={200} className='w-28  h-18' />
+"use client";
 
-            <div className=' h-full flex'>
-                <Block title={"Become a membor"} para={"additional 0% off on stays."} />
-                <Block title={"List your property"} para={"Start earning in 30 mins"} />
-                <Block title={"0124-6201611"} para={"Call us to Book now"} />
-                <Block title={"List your property"} para={"atart with me and my compont ."} />
-                <div className="flex items-center p-3" >
-                    <Image src={'/demo.png'} alt="demo" width={200} height={200} className="w-10 h-10 rounded-full" />
-                    <h3 className='font-bold'>Login / Singup</h3>
+import Image from 'next/image';
+import Block from "./Block";
+import Link from 'next/link';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+
+const Header1 = () => {
+    const [auth, setAuth] = useState(false);
+    const [profile, setProfile] = useState("");
+
+    const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    };
+
+    useEffect(() => {
+        const cookieValue = getCookie('profile');
+        setProfile(cookieValue || 'Dear');
+
+        const key = Cookies.get("user");
+        if (key) {
+            setAuth(true);
+            return;
+        }
+        setAuth(false);
+    }, [auth]);
+
+    const router = useRouter();
+
+    const handleLogout = () => {
+        Cookies.remove("profile");
+        Cookies.remove("user");
+        setProfile("");
+        setAuth(false);
+        toast("Logout successfully !!!");
+        router.push('/');
+    };
+
+    return (
+        <div className='z-50 sticky top-0 flex justify-between bg-gradient-to-l from-gray-100 to-gray-300 items-center h-20 px-4 md:px-10'>
+            <Link href={"/"} >
+                <p className="text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-800 to-gray-400">
+                    Urban
+                    <span className="text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-800 to-gray-400">Oasis</span>
+                </p>
+            </Link>
+
+            <div className='flex h-full items-center space-x-2 md:space-x-8'>
+                
+                <Link href={"/property"}>
+                    <Block title={`Add property`} para={"Start with UrbanOasis"} titleClass="text-lg md:text-xl" />
+                </Link>
+                <div className="flex items-center p-2 md:p-3">
+                    {
+                        auth ? (
+                            <p onClick={handleLogout} className='cursor-pointer'>
+                                <Block title={`Logout`} para={profile} titleClass="text-lg md:text-xl" />
+                            </p>
+                        ) : (
+                            <Link href={"/login"}>
+                                <Block title={`Login`} para={"Sign-up"} titleClass="text-lg md:text-xl" />
+                            </Link>
+                        )
+                    }
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Header1
+export default Header1;

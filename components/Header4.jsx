@@ -18,7 +18,11 @@ const Header4 = () => {
         </div>
         </div>
         <div className="flex">
-            <input type="email" name="" className="px-3 rounded-lg py-2 mr-3 w-80 h-15 outline-none border border-gray-300" plac eholder="e.g. joen@gamil.com" />
+        <label htmlFor="emial">
+
+            <input type="email" name="" className="px-3 rounded-lg py-2 mr-3 w-80 h-15 outline-none border border-gray-300" plac eholder="e.g. joen@gamil.com"  placeholder="e.g., john@email.com
+"/>
+        </label>
             <button type="submit" className="w-40 rounded-lg h-11 bg-red-600 font-bold cursor-pointer text-white  ">Notify</button>
         </div>
     </div>
