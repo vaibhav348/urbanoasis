@@ -46,14 +46,14 @@ const Header1 = () => {
             <Link href={"/"} >
                 <p className="text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-800 to-gray-400">
                     Urban
-                    <span className="text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-800 to-gray-400">Oasis</span>
+                    <span className="text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-800 to-gray-400">Osis</span>
                 </p>
             </Link>
 
             <div className='flex h-full items-center space-x-2 md:space-x-8'>
                 
                 <Link href={"/property"}>
-                    <Block title={`Add property`} para={"Start with UrbanOasis"} titleClass="text-lg md:text-xl" />
+                    <Block title={`Add property`} para={"Start with UrbanOsis"} titleClass="text-lg md:text-xl" />
                 </Link>
                 <div className="flex items-center p-2 md:p-3">
                     {
