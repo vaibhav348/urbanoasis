@@ -14,7 +14,8 @@ const Payment = () => {
     const { data } = await axios.post(`/api/razorpay`, val);
 
     const options = {
-      key: process.env.RAZORPAY_KEY,
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
+
       name: "Vaibhav Pandey",
       currency: data.currency,
       amount: data.amount,
@@ -41,7 +42,8 @@ const Payment = () => {
     <div className="bg-[url('/banking.jpg')] h-screen bg-no-repeat bg-cover bg-center bg-fixed">
     
 
-      <Script src="http://checkout.razorpay.com/v1/checkout.js" className="m-10 h-20"  />
+    <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="beforeInteractive" />
+
     </div>
   </>
 
